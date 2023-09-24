@@ -48,6 +48,35 @@ function Header(title) {
 
 function SideBar() {
   // creating elements
+  let side_bar = document.createElement("div");
+  let shopList_toggleBtn_container = document.createElement("div");
+  let shopList_toggleBtn = document.createElement("button");
+  let h2 = document.createElement("h2");
+  let h2_title = document.createElement("div");
+  let shopList_container = document.createElement("ul");
+  let shopList = document.createElement("li");
+  let shopListItem = document.createElement("div");
+  let SHOPLIST_DELETE_BTN = document.createElement("button");
+  // adding attributes
+  side_bar.setAttribute("class", "side_bar");
+  shopList_toggleBtn_container.setAttribute("class", "shopList_toggleBtn");
+  h2.setAttribute("id", "side_bar-title");
+  shopList_container.setAttribute("class", "shopList_container");
+  shopList.setAttribute("class", "shopList_list");
+  // adding content
+  // ! make list here of shop items
+  h2_title.textContent = "Your List";
+  shopList_toggleBtn.textContent = "X";
+  SHOPLIST_DELETE_BTN.textContent = "Delete";
+  shopListItem.textContent = "ps7 : 7";
+  // making the component
+  shopList.append(shopListItem, SHOPLIST_DELETE_BTN);
+  h2.append(h2_title);
+  shopList_toggleBtn_container.append(shopList_toggleBtn);
+  //
+  shopList_container.append(shopList);
+  side_bar.append(shopList_toggleBtn_container, h2, shopList_container);
+  return side_bar;
 }
 
 /*=======================================================================================*/
@@ -89,3 +118,5 @@ for (let i = 0; i < products_names.length; i++) {
   container.append(Item(products_names[i], arrOfImg[i]));
   Id += 1;
 }
+
+app.append(SideBar());

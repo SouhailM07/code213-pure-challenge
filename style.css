@@ -75,11 +75,11 @@ html {
   align-items: center;
 }
 
-#side_bar {
+.side_bar {
   position: fixed;
-  height: 11vh; /* 90vh  / 11rem*/
+  height: 90vh; /* 90vh  / 11rem*/
   overflow: hidden;
-  width: 6rem; /*  30rem  / 6rem*/
+  width: 30rem; /*  30rem  / 6rem*/
   top: 5vh;
   border-radius: 10px 0px 0px 10px;
   z-index: 10;
