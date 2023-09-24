@@ -2,9 +2,32 @@ let Id = 0;
 let arrOfItems = [];
 function renderList() {
   let lists = document.querySelector("ul");
+  let shopList = document.createElement("li");
+  let shopListItem = document.createElement("div");
+  let SHOPLIST_DELETE_BTN = document.createElement("button");
+
+  // att
+  shopList.setAttribute("class", "shopList_list");
+
+  // events
+  SHOPLIST_DELETE_BTN.textContent = "Delete";
+  // adding events [start]
+  SHOPLIST_DELETE_BTN.addEventListener("click", function () {
+    arrOfItems.splice(
+      arrOfItems.indexOf(this.parentElement.children[0].textContent),
+      1
+    );
+    this.parentElement.remove();
+  });
+  // render
+
   for (let i = 0; i < arrOfItems.length; i++) {
-    lists.append(`<li>hello</li>`);
+    // checkpoint
+    shopListItem.textContent = arrOfItems[i];
+    shopList.append(shopListItem, SHOPLIST_DELETE_BTN);
+    lists.append(shopList);
   }
+
   return lists;
 }
 /*=======================================================================================*/
@@ -72,6 +95,8 @@ function Item(name, img) {
       } else {
         arrOfItems.push(newItem);
       }
+      renderList();
+
       console.log(arrOfItems);
     }
   });
@@ -107,25 +132,17 @@ function SideBar() {
   let h2 = document.createElement("h2");
   let h2_title = document.createElement("div");
   let shopList_container = document.createElement("ul");
-  let shopList = document.createElement("li");
-  let shopListItem = document.createElement("div");
-  let SHOPLIST_DELETE_BTN = document.createElement("button");
+
   // adding attributes
   side_bar.setAttribute("class", "side_bar side_bar--show");
 
   shopList_toggleBtn_container.setAttribute("class", "shopList_toggleBtn");
   h2.setAttribute("id", "side_bar-title");
   shopList_container.setAttribute("class", "shopList_container");
-  shopList.setAttribute("class", "shopList_list");
   // adding content
   // ! make list here of shop items
   h2_title.textContent = "Your List";
   shopList_toggleBtn.textContent = "x";
-  SHOPLIST_DELETE_BTN.textContent = "Delete";
-  // adding events [start]
-  SHOPLIST_DELETE_BTN.addEventListener("click", function () {
-    this.parentElement.remove();
-  });
 
   //
   shopList_toggleBtn.addEventListener("click", function () {
@@ -133,10 +150,10 @@ function SideBar() {
     this.parentNode.parentNode.classList.toggle("side_bar--show");
   });
   // adding events [end]
-  shopListItem.textContent = "ps7 : 7";
+  // shopListItem.textContent = "ps7 : 7";
   // making the component
-  shopList.append(shopListItem, SHOPLIST_DELETE_BTN);
-  shopList_container.append(shopList);
+  // shopList.append(shopListItem, SHOPLIST_DELETE_BTN);
+  // shopList_container.append(shopList);
   //
   h2.append(h2_title);
   shopList_toggleBtn_container.append(shopList_toggleBtn);
