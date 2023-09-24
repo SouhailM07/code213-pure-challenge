@@ -41,7 +41,7 @@ html {
 
 .btn_container {
   /* align-self: center; */
-  /* visibility: hidden; */
+  visibility: hidden;
   width: 8rem;
   display: flex;
   justify-content: space-between;
