@@ -1,10 +1,20 @@
 let Id = 0;
-
+let arrOfItems = [];
+function renderList() {
+  let lists = document.querySelector("ul");
+  for (let i = 0; i < arrOfItems.length; i++) {
+    lists.append(`<li>hello</li>`);
+  }
+  return lists;
+}
 /*=======================================================================================*/
 // components sections
 /*=======================================================================================*/
 
 function Item(name, img) {
+  let itemCounter = 0;
+  let oldItem = "";
+  let newItem = "";
   // creating components
   let item_container = document.createElement("div");
   let img_product = document.createElement("img");
@@ -25,12 +35,55 @@ function Item(name, img) {
   productName.textContent = name;
   incrementBtn.textContent = "+";
   decrementBtn.textContent = "-";
+  //  adding events [start]
+  incrementBtn.addEventListener("click", function () {
+    // console.log(this.parentElement.parentElement);
+    ++itemCounter;
+    let itemName = this.parentElement.parentElement.children[1].textContent;
+    let itemInfo = `${itemName} : ${itemCounter}`;
+    oldItem = newItem;
+    newItem = itemInfo;
+    if (arrOfItems.includes(oldItem)) {
+      let itemPlace = arrOfItems.indexOf(oldItem);
+      arrOfItems.splice(itemPlace, 1, newItem);
+    } else {
+      arrOfItems.push(newItem);
+    }
+    renderList();
+    console.log(arrOfItems);
+  });
+
+  decrementBtn.addEventListener("click", function () {
+    // console.log(this.parentElement.parentElement);
+    if (itemCounter > 0) {
+      --itemCounter;
+
+      let itemName = this.parentElement.parentElement.children[1].textContent;
+      let itemInfo = `${itemName} : ${itemCounter}`;
+      oldItem = newItem;
+      newItem = itemInfo;
+      if (itemCounter == 0) {
+        let itemPlace = arrOfItems.indexOf(newItem);
+        // alert(itemCounter);
+        arrOfItems.splice(itemPlace, 1);
+      } else if (arrOfItems.includes(oldItem) && itemCounter > 0) {
+        let itemPlace = arrOfItems.indexOf(oldItem);
+        arrOfItems.splice(itemPlace, 1, newItem);
+      } else {
+        arrOfItems.push(newItem);
+      }
+      console.log(arrOfItems);
+    }
+  });
+
+  //  adding events [end]
+
   // inserting elements
   buttons_container.append(decrementBtn, incrementBtn);
   item_container.append(img_product, productName, buttons_container);
   //  adding events
   incrementBtn.addEventListener("click", (e) => {
-    console.log(item_container.id);
+    // console.log(item_container.id);
   });
 
   return item_container;
@@ -58,7 +111,8 @@ function SideBar() {
   let shopListItem = document.createElement("div");
   let SHOPLIST_DELETE_BTN = document.createElement("button");
   // adding attributes
-  side_bar.setAttribute("class", "side_bar");
+  side_bar.setAttribute("class", "side_bar side_bar--show");
+
   shopList_toggleBtn_container.setAttribute("class", "shopList_toggleBtn");
   h2.setAttribute("id", "side_bar-title");
   shopList_container.setAttribute("class", "shopList_container");
@@ -66,15 +120,26 @@ function SideBar() {
   // adding content
   // ! make list here of shop items
   h2_title.textContent = "Your List";
-  shopList_toggleBtn.textContent = "X";
+  shopList_toggleBtn.textContent = "x";
   SHOPLIST_DELETE_BTN.textContent = "Delete";
+  // adding events [start]
+  SHOPLIST_DELETE_BTN.addEventListener("click", function () {
+    this.parentElement.remove();
+  });
+
+  //
+  shopList_toggleBtn.addEventListener("click", function () {
+    this.parentNode.parentNode.classList.toggle("side_bar--hide");
+    this.parentNode.parentNode.classList.toggle("side_bar--show");
+  });
+  // adding events [end]
   shopListItem.textContent = "ps7 : 7";
   // making the component
   shopList.append(shopListItem, SHOPLIST_DELETE_BTN);
+  shopList_container.append(shopList);
+  //
   h2.append(h2_title);
   shopList_toggleBtn_container.append(shopList_toggleBtn);
-  //
-  shopList_container.append(shopList);
   side_bar.append(shopList_toggleBtn_container, h2, shopList_container);
   return side_bar;
 }
