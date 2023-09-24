@@ -58,6 +58,7 @@ html {
   border: none;
   color: white;
   font-size: 2rem;
+  cursor: pointer;
 }
 
 .btn:nth-of-type(1) {
@@ -72,4 +73,79 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#side_bar {
+  position: fixed;
+  height: 11vh; /* 90vh  / 11rem*/
+  overflow: hidden;
+  width: 6rem; /*  30rem  / 6rem*/
+  top: 5vh;
+  border-radius: 10px 0px 0px 10px;
+  z-index: 10;
+  right: 0px;
+  background-color: white;
+  border: 2px solid black;
+  /* do toggle to this  */
+  /* overflow-y: scroll; */
+}
+
+.shopList_container {
+  /* border: 3px solid blue; */
+  list-style: none;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  padding: 0;
+}
+
+.shopList_toggleBtn {
+  top: 10px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.shopList_toggleBtn button {
+  height: 4rem;
+  width: 4rem;
+  font-size: 2rem;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.shopList_list {
+  border: 2px solid black;
+  height: 3rem;
+  margin: 1rem 0px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  padding-left: 10px;
+  width: 70%;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.shopList_list button {
+  background-color: red;
+  border: none;
+  color: white;
+  height: 100%;
+  border-radius: 3px;
+}
+
+#side_bar-title {
+  margin: 30px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0.2rem;
+  background-color: aqua;
+}
+
+#side_bar-title div {
+  background-color: white;
+  padding: 0px 10px;
 }

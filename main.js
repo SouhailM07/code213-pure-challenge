@@ -1,3 +1,5 @@
+let Id = 0;
+
 /*=======================================================================================*/
 // components sections
 /*=======================================================================================*/
@@ -12,6 +14,7 @@ function Item(name, img) {
   let decrementBtn = document.createElement("button");
   // adding attributes
   item_container.setAttribute("class", "item");
+  item_container.setAttribute("id", `item${Id}`);
   img_product.setAttribute("class", "img");
   buttons_container.setAttribute("class", "btn_container");
   incrementBtn.setAttribute("class", "btn");
@@ -25,6 +28,10 @@ function Item(name, img) {
   // inserting elements
   buttons_container.append(decrementBtn, incrementBtn);
   item_container.append(img_product, productName, buttons_container);
+  //  adding events
+  incrementBtn.addEventListener("click", (e) => {
+    console.log(item_container.id);
+  });
 
   return item_container;
 }
@@ -37,6 +44,10 @@ function Header(title) {
   // adding content
   header.textContent = title;
   return header;
+}
+
+function SideBar() {
+  // creating elements
 }
 
 /*=======================================================================================*/
@@ -76,4 +87,5 @@ app.prepend(Header("Welcome to gaming store"));
 //
 for (let i = 0; i < products_names.length; i++) {
   container.append(Item(products_names[i], arrOfImg[i]));
+  Id += 1;
 }
